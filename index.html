@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>Quotes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        #doticon {
+            font-size: 4rem;
+            color: rgb(63, 63, 63);
+        }
+
+        #icon {
+            font-size: 2.5rem;
+            color: rgb(53, 225, 231);
+            position: relative;
+            left: 94%;
+            z-index: 232;
+        }
+
+        .inner {
+            position: relative;
+        }
+
+        .inner::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: rgba(139, 168, 168, 0.404);
+            top: 0%;
+            left: 0%;
+            position: absolute;
+            clip-path: polygon(100% 0, 65% 0, 100% 32%);
+            clip-path: polygon(100% 0, 86% 0, 100% 16%);
+            z-index: 1;
+
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(9, 116, 134);
+        }
+
+        .inner {
+            width: 50rem;
+            height: 40rem;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .common {
+            width: 100% !important;
+
+        }
+
+        .icon {
+            padding: 1rem orem;
+            height: 50%;
+
+        }
+
+        .icon,
+        .dots {
+
+            font-size: 3rem;
+        }
+
+        .dots {
+            align-items: flex-start !important;
+            padding: 0rem 3rem;
+
+        }
+
+        #upperpart {
+            height: 20%;
+            width: 100%;
+        }
+
+        .para {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.3rem;
+
+        }
+
+        .author {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 1.5rem;
+            width: 90% !important;
+        }
+
+        #button {
+            font-size: 2.5rem !important;
+            background-color: rgb(32, 167, 167);
+            border: none;
+            outline: none;
+            color: white;
+            height: auto;
+            padding: 1rem 0rem;
+            box-shadow: 1px 1px 12px rgb(9 116 134), inset 1px 1px 12px white;
+            z-index: 324234;
+        }
+
+        #button:hover {
+            cursor: pointer;
+        }
+
+        #quote {
+
+            max-width: 40rem;
+        }
+        #icon:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="inner">
+
+
+            <div id="upperpart">
+
+                <div class="common icon">
+                    <i id="icon" class="fab fa-twitter"></i>
+                </div>
+                <div class="common dots">
+
+                    <i id="doticon" class="fas fa-quote-left"></i>
+                </div>
+            </div>
+
+
+
+            <div class="common para">
+
+                <p id="quote">
+        
+
+    </p>
+                
+            </div>
+            <div class="common author"><h3 id="author"></h3></div>
+            <button onclick="generatequote()" class="common" id="button">
+                New Quote
+            </button>
+
+
+
+        </div>
+    </div>
+
+
+
+</body>
+<script>
+    let quote=document.getElementById("quote");
+    let icon=document.getElementById("icon");
+    let button=document.getElementById("button");
+    let writter=document.getElementById("author");
+let text="";
+   function generaterandom()
+    {
+        let a= Math.floor(Math.random()*400);
+        return a;
+
+    }
+
+    function generatequote(){
+
+        let data;
+        
+        const api="https://type.fit/api/quotes";
+
+
+         var request = new XMLHttpRequest();
+request.open('GET',api, /* async = */ false);
+request.send();
+
+ data= JSON.parse(request.responseText);
+console.log(data);
+   
+// var xhr = new XMLHttpRequest();
+// xhr.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=London&mode=json", false); xhr.send();
+
+ //data is now a javascript object full of the API data
+
+    let random=generaterandom();
+text=data[random].text;
+            quote.innerHTML=text;
+let ather=data[random].author;
+        // ather==null? writter.innerHTML="Unkonw":writter.innerHTML=ather;
+
+
+// console.log(data);
+
+    //      fetch('/readme.txt')
+    // .then(response => response.text())
+    // .then(data => console.log(data));
+            // let data=  fch.json();
+
+         
+
+
+
+
+
+
+}
+
+
+
+generatequote();
+
+
+icon.addEventListener("click",()=>{
+    let youtube=`    https://www.google.com/search?q=${text}&ei=5L7uYOHgEYe7tAb7qbeICw&oq=${text}&gs_lcp=Cgdnd3Mtd2l6EAMyCAgAELEDEJECMgcILhCxAxBDMgUILhCxAzIFCC4QsQMyBQguELEDMgUILhCxAzIFCC4QsQMyCAguELEDEIMBMgIIADICCAA6BwgAEEcQsAM6BwgAELADEEM6DQguELADEMgDEEMQkwI6CgguELADEMgDEEM6BAgAEEM6BQgAELEDOgcIABCxAxBDOgUIABCRAjoICAAQsQMQgwE6CwguELEDEMcBEK8BSgUIOBIBMUoECEEYAFCCbVjdfmD9hwFoAnACeAOAAaAFiAGyHJIBCTItMi42LjEuMZgBAKABAaoBB2d3cy13aXqwAQDIAQzAAQE&sclient=gws-wiz&ved=0ahUKEwjh4pvCr-LxAhWHHc0KHfvUDbEQ4dUDCA4&uact=5
+`;
+    window.open(youtube);
+});
+
+
+
+
+
+
+</script>
+
+</html>
